@@ -130,4 +130,42 @@
         <category>A-计算机相关</category>
       </categories>
   </entry>
+  <entry>
+    <title>ffmpeg音视频拼接命令</title>
+    <url>/2023/01/30/ffmpeg%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>#ffmpeg</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -ss 00:05:10 -to 00:15:30 -c:v copy -c:a copy output2.mp4</span><br></pre></td></tr></table></figure>
+<p>剪辑，从 <code>00:05:10</code> 到 <code>00:15:30</code></p>
+]]></content>
+      <categories>
+        <category>A-计算机相关</category>
+      </categories>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2023/08/02/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2Office/</url>
+    <content><![CDATA[<p>记一次安装 office 失败的经历……<br>一个可以一键部署 Office 的神奇网站<br><a class="link"   href="https://otp.landian.vip/zh-cn/" >Office Tool Plus<i class="fas fa-external-link-alt"></i></a><br>还有一个可以进行激活的软件<br>HEU KMS Activator<br>这里还有 KMS 的链接<br><a class="link"   href="https://www.coolhub.top/tech-articles/kms_list.html" >https://www.coolhub.top/tech-articles/kms_list.html<i class="fas fa-external-link-alt"></i></a><br>里面收集了大量的 KMS 服务器地址</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>ffmpeg音视频拼接命令</title>
+    <url>/2023/01/30/ffmpeg%E9%9F%B3%E8%A7%86%E9%A2%91%E6%8B%BC%E6%8E%A5%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>#ffmpeg</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ffmpeg -f concat -i list.txt -c copy all.m4a </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在这里 list. txt 是一个待拼接文件的列表，内容是这样的</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">file &#x27;1.m4a&#x27;</span><br><span class="line">file &#x27;2.m4a&#x27;</span><br><span class="line">file &#x27;3.m4a&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>同理，如果是拼接音频里面就写 <code>.MP3</code><br>可能会出现一些问题，例如提示</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Unsafe file name</span><br></pre></td></tr></table></figure>
+
+<p>需要添加一个 <code>-safe 0</code> 参数，如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ffmpeg -f concat -safe 0 -i list.txt -c copy all.m4a </span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>A-计算机相关</category>
+      </categories>
+  </entry>
 </search>

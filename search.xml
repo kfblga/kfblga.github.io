@@ -39,4 +39,95 @@
 <p><img lazyload="" alt="只是图片" data-src="/2023/08/02/test123/1.png"></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>【KDE桌面BUG】新安装应用不显示图标</title>
+    <url>/2023/04/19/%E3%80%90KDE%E6%A1%8C%E9%9D%A2BUG%E3%80%91%E6%96%B0%E5%AE%89%E8%A3%85%E5%BA%94%E7%94%A8%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%9B%BE%E6%A0%87/</url>
+    <content><![CDATA[<p>【问题】在 KDE 桌面下，安装新软件之后新软件的图标并不会在开始菜单当中显示<br>【解决方案】 <a class="link"   href="https://zhuanlan.zhihu.com/p/78349174" >解决方案<i class="fas fa-external-link-alt"></i></a></p>
+<ul>
+<li>打开 dolphin 文件管理器，打开 <code>/home/用户名</code>，例如 <code>/home/kfkfkf123</code></li>
+<li>进入之后在 dolphin 的右上角设置里显示隐藏的文件夹</li>
+<li>能看到隐藏文件之后再打开 <code>.local/share</code> 文件夹</li>
+<li>在这个文件夹下创建 <code>applications</code> 文件夹<br>这时再打开开始菜单就可以看到新安装软件的图标了</li>
+</ul>
+]]></content>
+      <categories>
+        <category>A-计算机相关</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>WSL中安装ZSH并配置</title>
+    <url>/2023/01/19/WSL%E4%B8%AD%E5%AE%89%E8%A3%85ZSH%E5%B9%B6%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>#Linux #WSL</p>
+<h1 id="安装-zsh"><a href="#安装-zsh" class="headerlink" title="安装 zsh"></a>安装 zsh</h1><p>首先打开终端，打开 WSL ，我这里用的是 Ubuntu<br>查看是否安装 zsh</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/shells</span><br></pre></td></tr></table></figure>
+<p>没有就安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装-oh-my-zsh"><a href="#安装-oh-my-zsh" class="headerlink" title="安装 oh-my-zsh"></a>安装 oh-my-zsh</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</span><br><span class="line"></span><br><span class="line">sh -c &quot;$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;</span><br></pre></td></tr></table></figure>
+<p>能跑得通就行，跑不通就得用其他办法<br>由于网络问题，导致使用 GitHub 上的安装命令会发生错误，</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh</span><br></pre></td></tr></table></figure>
+<p>下载安装脚本，顺便也把 <code>git</code> 给装了<br>然后给脚本权限</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod +x install.sh</span><br></pre></td></tr></table></figure>
+<p>如果执行报错可以使用 nano 或 vim 对 <code>install.sh</code> 进行修改<br>找到以下部分</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Default settings</span> </span><br><span class="line">ZSH=$&#123;ZSH:-~/.oh-my-zsh&#125; </span><br><span class="line">REPO=$&#123;REPO:-ohmyzsh/ohmyzsh&#125; </span><br><span class="line">REMOTE=$&#123;REMOTE:-https://github.com/$&#123;REPO&#125;.git&#125; </span><br><span class="line">BRANCH=$&#123;BRANCH:-master&#125;</span><br></pre></td></tr></table></figure>
+<p>修改中间两行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">REPO=$&#123;REPO:-mirrors/oh-my-zsh&#125; </span><br><span class="line">REMOTE=$&#123;REMOTE:-https://gitee.com/$&#123;REPO&#125;.git&#125;</span><br></pre></td></tr></table></figure>
+<p>再执行就能装上了</p>
+<h1 id="oh-my-zsh-的一些小设置"><a href="#oh-my-zsh-的一些小设置" class="headerlink" title="oh-my-zsh 的一些小设置"></a>oh-my-zsh 的一些小设置</h1><p>修改主题</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>或者 nano 也可以，修改主题的部分为 <code>agnoster</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ZSH_THEME=&quot;agnoster&quot;</span><br></pre></td></tr></table></figure>
+<p>文件保存后应用</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>应用上去之后就会出现字体不显示的问题，需要安装 Powerline 字体，打开链接<a class="link"   href="https://github.com/powerline/fonts" >Powerline<i class="fas fa-external-link-alt"></i></a> 找到一个 Release 进行安装，因为用的是 WSL 就没法直接装这个字体，只好先安装到 Windows 下，如果用的 Linux 就可以直接安装到系统里了。<br>下载好的压缩包里有一个给 Windows 的 Powershell 用的脚本，后缀名为 <code>.ps1</code>，在 powershell 当中用管理员权限执行这个脚本就可以进行字体的安装。<br>如果无法进行安装，例如提示 <code>因为在此系统上禁止运行脚本</code> 这种话就要让系统可以运行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Get-ExecutionPolicy</span><br></pre></td></tr></table></figure>
+<p>不出意外的话会得到 <code>Restricted</code><br>然后执行</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Set-ExecutionPolicy Unrestricted</span><br></pre></td></tr></table></figure>
+<p>设定为 Y 就可以运行这个脚本了<br>在安装好字体之后就可以在 Windows Terminal 上进行设置的修改了，点击设置，打开 Ubuntu，选择外观，里面有字体的选项，随便选择一个 <code>xxx for powerline</code> 就可以，重启 Windows terminal 之后就没有乱码了</p>
+]]></content>
+      <categories>
+        <category>A-计算机相关</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>【问题处理】连入SSH后只显示一个美元符号$</title>
+    <url>/2023/02/24/%E3%80%90%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86%E3%80%91%E8%BF%9E%E5%85%A5SSH%E5%90%8E%E5%8F%AA%E6%98%BE%E7%A4%BA%E4%B8%80%E4%B8%AA%E7%BE%8E%E5%85%83%E7%AC%A6%E5%8F%B7$/</url>
+    <content><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">Get:1 http://mirrors.163.com/ubuntu-ports bionic InRelease [242 kB]</span><br><span class="line">Fetched 242 kB <span class="keyword">in</span> 1s (278 kB/s)</span><br><span class="line">Reading package lists... Done</span><br></pre></td></tr></table></figure>
+<p>例如这样，正常都是要显示出当前文件夹位置的，例如下面这种情形</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kfkfkf123@localhost:/$ <span class="built_in">ls</span></span><br><span class="line">bin  boot  dev  etc  home  lib  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br></pre></td></tr></table></figure>
+<p>缺少 <code>kfkfkf123@localhost:/$</code> 这种应该如何处理<br>问题在于这个用户默认使用的 shell 并不是常用的 bash</p>
+<h1 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/passwd</span><br></pre></td></tr></table></figure>
+<p>用 <code>vim</code> 或者 <code>nano</code> 都可以<br>找到自己的用户，例如我这里是 kfkfkf123<br>修改后面的<br><code>/bin/sh</code> 改成<code>/bin/bash</code><br>然后重新登录到这个用户就可以回到原先熟悉的界面了</p>
+]]></content>
+      <categories>
+        <category>A-计算机相关</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>如何使用Linux Deploy在安卓手机上安装Linux</title>
+    <url>/2023/02/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Linux%20Deploy%E5%9C%A8%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85Linux/</url>
+    <content><![CDATA[<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>把手机 root 了</p>
+<h1 id="设置-Linux-Deploy"><a href="#设置-Linux-Deploy" class="headerlink" title="设置 Linux Deploy"></a>设置 Linux Deploy</h1><p>在右下角调整安装选项</p>
+<ul>
+<li>发行版：Ubuntu</li>
+<li>架构：看手机，默认 arm64</li>
+<li>发行版：看情况选择</li>
+<li>源地址：选择国内的源，网易的 <code>http://mirrors.163.com/ubuntu-ports/</code><ul>
+<li>可以选择别的源，但尝试很多只有网易的可以用</li>
+<li>ubuntu-ports 是针对 arm 处理器的 Ubuntu 版本</li>
+</ul>
+</li>
+<li>用户名密码自行设置</li>
+<li>启用 SSH</li>
+</ul>
+<h1 id="进行安装"><a href="#进行安装" class="headerlink" title="进行安装"></a>进行安装</h1><p>右上角选择安装<br>安装好上面会写 <code>&lt;&lt;&lt;deploy</code><br>点击下面的启动</p>
+<h1 id="连接-SSH"><a href="#连接-SSH" class="headerlink" title="连接 SSH"></a>连接 SSH</h1><p>找到手机 IP，不是软件上面写的 172 那个 IP，是手机的 IP<br>用 SSH 命令连接即可，账号密码是之前设置里写的</p>
+<h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><ul>
+<li>Ssh 启动失败：把镜像大小手动设置一下，然后重新安装，实在不行换个源安装</li>
+</ul>
+]]></content>
+      <categories>
+        <category>A-计算机相关</category>
+      </categories>
+  </entry>
 </search>
